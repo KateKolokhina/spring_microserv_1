@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>BeautyShop.com</title>
+    <link
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+            crossorigin="anonymous"
+    />
+    <link
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+            crossorigin="anonymous"
+    />
+</head>
+
+<body style="padding-top: 100px">
+<div th:replace="navbar :: navbar">
+</div>
+
+<main role="main">
+    <div class="container-md">
+        <div class="row">
+            <div class="col-md-12">
+                <a class="btn btn-warning" href="/user/add" role="button">Створити</a>
+                <div class="card mx-4 my-4">
+                    <div class="card-header bg-light text-info">
+                        <h4 class="text-center" th:text="Користувачі"></h4>
+                    </div>
+                    <div class="card-body">
+                        <div th:if="${users.size() == 0 }">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span th:text="${'Немає користувачів'}"></span>
+                            </li>
+                        </div>
+                        <table id ="dtBasicExample" class="table table-sm" th:if="${users.size() != 0 }" >
+                            <thead>
+                            <tr>
+                                <th>ІПН</th>
+                                <th>Email</th>
+                                <th>ПІБ</th>
+                                <th>Телефон</th>
+                                <th>Адреса</th>
+                                <th>Примітки</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <th:block th:each="user : ${users}">
+                                <tr>
+                                    <td th:text="${user.getIpn()}"/>
+                                    <td th:text="${user.getEmail()}"/>
+                                    <td th:text="${user.getPib()}"/>
+                                    <td th:text="${user.getTelephone()}"/>
+                                    <td th:text="${user.getAddress()}"/>
+                                    <td th:text="${user.getNotes()}"/>
+                                    <td>
+                                        <form class="mx-2" action="#"
+                                              th:action="@{'/user/'+${user.getIpn()}}"
+                                              th:method="get">
+                                            <input class="btn btn-info btn-sm" type="submit" value="Переглянути"/>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="#"
+                                              th:if="${user.getStatus().equals('USER') }"
+                                              th:action="@{'/user/deactive/'+${user.getIpn()}}" th:method="delete">
+
+                                            <input type="hidden" name="_method" value="delete"/>
+                                            <button class="btn btn-danger btn-sm" type="submit" id="submitButton1">Деактивувати</button>
+                                        </form>
+                                        <form action="#"
+                                              th:if="${user.getStatus().equals('UNACTIVE') }"
+                                              th:action="@{'/user/active/'+${user.getIpn()}}" th:method="delete">
+                                            <input type="hidden" name="_method" value="delete"/>
+                                            <button class="btn btn-danger btn-sm" type="submit" id="submitButton1">Активувати</button>
+                                        </form>
+                                    </td>
+
+                                </tr>
+                            </th:block>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+<script
+        src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+        crossorigin="anonymous"
+></script>
+
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.1/cjs/popper.min.js"
+        integrity="sha256-T3bYsIPyOLpEfeZOX4M7J59ZoDMzuYFUsPiSN3Xcc2M="
+        crossorigin="anonymous"
+></script>
+
+<script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"
+></script>
+</body>
+</html>

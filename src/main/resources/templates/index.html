@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>BeautyShop.com</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body style="padding-top: 100px;">
+<div th:replace="navbar :: navbar">
+</div>
+<main role="main">
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="row" style="width: 60%">
+            <div class="col-md-12">
+                <div class="card w-100 my-4">
+                    <div class="card-header bg-light text-info">
+                        <h4 class="text-center"> Ласкаво просимо до магазину BeautyShop.com</h4>
+                    </div>
+                    <div class="card-body" style="width:auto; text-align: center">
+                        Тут ви знайдете все для догляду за собою та своїм тілом!
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
